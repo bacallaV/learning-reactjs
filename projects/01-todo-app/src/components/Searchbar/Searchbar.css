@@ -1,0 +1,14 @@
+input {
+  padding: 0.5rem;
+  margin-bottom: 24px;
+
+  border: 1px solid #313642;
+  background-color: #313642;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+
+  font-size: 1rem;
+  color: white;
+
+  transition: box-shadow 0.3s;
+}
