@@ -16,7 +16,7 @@
   color: white;
 }
 
-.ti-label-completed {
+.ti-label.completed {
   color: #a4a4a4;
   text-decoration: line-through;
 }
@@ -50,6 +50,9 @@
   cursor: pointer;
   transition: background-color 0.25s;
 }
+.ti-complete-button.completed {
+  background-color: darkgray;
+}
 
 .ti-item:hover {
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
@@ -57,6 +60,9 @@
 
 .ti-remove-button:hover {
   background-color: #ff5a4c;
+}
+.ti-complete-button.completed:hover {
+  background-color: gray;
 }
 
 .ti-complete-button:hover {

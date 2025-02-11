@@ -8,6 +8,7 @@ interface CounterProps {
 export default function Counter({ total, completed }: CounterProps) {
   return (
     <h1>
+      {completed === total ? '🎉' : '🤔'}
       Has completado {completed} de {total} TODOs
     </h1>
   )
