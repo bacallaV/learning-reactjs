@@ -23,16 +23,18 @@ function App() {
     setSearchValue(searchValue);
   };
 
-  const handleCompleteTodo = (index: number) => {
-    const newTodos = [...todos];
-    newTodos[index].completed = !newTodos[index].completed;
-    setTodos(newTodos);
-  };
+  const handleCompleteTodo = (index: number) =>
+    () => {
+      const newTodos = [...todos];
+      newTodos[index].completed = !newTodos[index].completed;
+      setTodos(newTodos);
+    };
 
-  const handleRemoveTodo = (index: number) => {
-    const newTodos = todos.filter((_, i) => i!== index);
-    setTodos(newTodos);
-  };
+  const handleRemoveTodo = (index: number) =>
+    () => {
+      const newTodos = todos.filter((_, i) => i!== index);
+      setTodos(newTodos);
+    };
 
   return (
     <div className='app'>
@@ -51,12 +53,8 @@ function App() {
             key={index}
             label={todo.label}
             completed={todo.completed}
-            onCompleted={() => {
-              handleCompleteTodo(index);
-            }}
-            onRemove={() => {
-              handleRemoveTodo(index);
-            }}
+            onCompleted={handleCompleteTodo(index)}
+            onRemove={handleRemoveTodo(index)}
           />
         ))}
       </ul>
