@@ -44,7 +44,9 @@ function App() {
       <Searchbar onSearch={handleSearch} />
 
       <ul className='todoList'>
-        {todos.map((todo, index) => (
+        {todos
+        .filter((todo) => todo.label.toLowerCase().includes(searchValue.toLowerCase()))
+        .map((todo, index) => (
           <TodoItem
             key={index}
             label={todo.label}
