@@ -1,6 +1,3 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import { useState } from 'react'
 import './App.css'
 
@@ -9,15 +6,15 @@ import Counter from './components/Counter/Counter'
 import Searchbar from './components/Searchbar/Searchbar'
 import TodoItem from './components/TodoItem/TodoItem'
 
+import useLocalStorage from './hooks/useLocalStorage'
+
 function App() {
   const [searchValue, setSearchValue] = useState('');
 
-  const [todos, setTodos] = useState<{
+  const [todos, setTodos] = useLocalStorage<{
     label: string;
     completed: boolean;
-  }[]>([
-    { label: 'Aprender TypeScript', completed: false },
-  ]);
+  }[]>('react-todos', []);
 
   const handleSearch = (searchValue: string) => {
     setSearchValue(searchValue);
