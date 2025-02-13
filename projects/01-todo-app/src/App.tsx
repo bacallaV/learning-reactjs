@@ -11,7 +11,11 @@ import useLocalStorage from './hooks/useLocalStorage'
 function App() {
   const [searchValue, setSearchValue] = useState('');
 
-  const [todos, setTodos] = useLocalStorage<{
+  const {
+    item: todos,
+    setItem: setTodos,
+    status,
+  } = useLocalStorage<{
     label: string;
     completed: boolean;
   }[]>('react-todos', []);
@@ -42,18 +46,39 @@ function App() {
 
       <Searchbar onSearch={handleSearch} />
 
+      {
+        status === 'loading' && (
+          <p> Cargando tareas ⌛ </p>
+        )
+      }
+
+      {
+        status === 'failed' && (
+          <p> Ocurrió un error al cargar las tareas 🤯 </p>
+        )
+      }
+
+      {
+        (status === 'success' && todos.length === 0) && (
+          <p> No hay tareas por hacer 🎉 </p>
+        )
+      }
+
       <ul className='todoList'>
-        {todos
-        .filter((todo) => todo.label.toLowerCase().includes(searchValue.toLowerCase()))
-        .map((todo, index) => (
-          <TodoItem
-            key={index}
-            label={todo.label}
-            completed={todo.completed}
-            onCompleted={handleCompleteTodo(index)}
-            onRemove={handleRemoveTodo(index)}
-          />
-        ))}
+        {
+          status === 'success' &&
+          todos
+          .filter((todo) => todo.label.toLowerCase().includes(searchValue.toLowerCase()))
+          .map((todo, index) => (
+            <TodoItem
+              key={index}
+              label={todo.label}
+              completed={todo.completed}
+              onCompleted={handleCompleteTodo(index)}
+              onRemove={handleRemoveTodo(index)}
+            />
+          ))
+        }
       </ul>
 
       <AddButton />
