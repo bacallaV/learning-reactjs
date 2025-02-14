@@ -7,6 +7,7 @@ import Searchbar from './components/Searchbar/Searchbar'
 import TodoItem from './components/TodoItem/TodoItem'
 
 import useLocalStorage from './hooks/useLocalStorage'
+import TodoSkeleton from './components/TodoSkeleton/TodoSkeleton'
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
@@ -46,25 +47,29 @@ function App() {
 
       <Searchbar onSearch={handleSearch} />
 
-      {
-        status === 'loading' && (
-          <p> Cargando tareas ⌛ </p>
-        )
-      }
-
-      {
-        status === 'failed' && (
-          <p> Ocurrió un error al cargar las tareas 🤯 </p>
-        )
-      }
-
-      {
-        (status === 'success' && todos.length === 0) && (
-          <p> No hay tareas por hacer 🎉 </p>
-        )
-      }
-
       <ul className='todoList'>
+        {
+          status === 'loading' && (
+            <>
+              <TodoSkeleton />
+              <TodoSkeleton />
+              <TodoSkeleton />
+            </>
+          )
+        }
+
+        {
+          status === 'failed' && (
+            <p> Ocurrió un error al cargar las tareas 🤯 </p>
+          )
+        }
+
+        {
+          (status === 'success' && todos.length === 0) && (
+            <p> No hay tareas por hacer 🎉 </p>
+          )
+        }
+
         {
           status === 'success' &&
           todos

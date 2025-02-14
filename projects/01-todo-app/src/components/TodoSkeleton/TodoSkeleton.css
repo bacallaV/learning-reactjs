@@ -1,0 +1,55 @@
+.ti-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  padding: 12px 16px;
+
+  background-color: #313642;
+  border-radius: 16px;
+
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.ti-label {
+  width: 75%;
+  height: 14px;
+
+  background-color: #4d5568;
+  border-radius: 8px;
+}
+
+.ti-button {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+
+  border: none;
+  background-color: #4d5568;
+  border-radius: 50%;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+.ti-item,
+.ti-label,
+.ti-button {
+  background: linear-gradient(90deg, #4d5568, #313642);
+  background-size: 400% 400%;
+  animation: gradient 1.5s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
