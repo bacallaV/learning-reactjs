@@ -1,4 +1,4 @@
-.ti-item {
+.tis-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,7 +12,7 @@
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
 }
 
-.ti-label {
+.tis-label {
   width: 75%;
   height: 14px;
 
@@ -20,7 +20,7 @@
   border-radius: 8px;
 }
 
-.ti-button {
+.tis-button {
   width: 24px;
   height: 24px;
   padding: 4px;
@@ -34,9 +34,9 @@
   cursor: pointer;
 }
 
-.ti-item,
-.ti-label,
-.ti-button {
+.tis-item,
+.tis-label,
+.tis-button {
   background: linear-gradient(90deg, #4d5568, #313642);
   background-size: 400% 400%;
   animation: gradient 1.5s ease infinite;
