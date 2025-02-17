@@ -1,7 +1,7 @@
 import React from 'react'
 import './AddButton.css'
 
-import { TodoContext } from '../../core/TodoContext';
+import { TodoContext } from '@app/core/TodoContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faTimes } from '@fortawesome/free-solid-svg-icons';

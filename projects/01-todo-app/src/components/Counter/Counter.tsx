@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import './Counter.css';
 
-import { TodoContext } from '../../core/TodoContext';
+import { TodoContext } from '@app/core/TodoContext';
 
 export default function Counter() {
   const { todos } = useContext(TodoContext);

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './AddTodoForm.css'
-import { TodoContext } from '../../core/TodoContext';
+import { TodoContext } from '@app/core/TodoContext';
 
 export default function AddTodoForm() {
   const { toggleModal, addTodo } = React.useContext(TodoContext);

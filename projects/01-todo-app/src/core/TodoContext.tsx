@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
-import { Todo } from "../types/todo.type";
+import useLocalStorage from "@app/hooks/useLocalStorage";
+import { Todo } from "@app/types/todo.type";
 
 type TodoContextType = {
   searchValue: string;

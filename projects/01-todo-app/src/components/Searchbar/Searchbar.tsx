@@ -2,7 +2,7 @@ import { ChangeEvent, useContext } from 'react';
 
 import './Searchbar.css'
 
-import { TodoContext } from '../../core/TodoContext';
+import { TodoContext } from '@app/core/TodoContext';
 
 export default function Searchbar() {
   const { handleSearch } = useContext(TodoContext);
