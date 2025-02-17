@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { Todo } from "../types/todo.type";
 
 type TodoContextType = {
   searchValue: string;
@@ -13,6 +14,7 @@ type TodoContextType = {
   handleRemoveTodo: (index: number) => () => void;
   isModalOpen: boolean;
   toggleModal: () => void;
+  addTodo: (todo: Todo) => void;
 };
 const TodoContext = createContext<TodoContextType>({
   searchValue: '',
@@ -23,6 +25,8 @@ const TodoContext = createContext<TodoContextType>({
   handleRemoveTodo: () => () => {},
   isModalOpen: false,
   toggleModal: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  addTodo: (_: Todo) => {},
 });
 
 interface TodoProviderProps {
@@ -36,10 +40,7 @@ export default function TodoProvider({ children }: TodoProviderProps) {
       item: todos,
       setItem: setTodos,
       status,
-    } = useLocalStorage<{
-      label: string;
-      completed: boolean;
-    }[]>('react-todos', []);
+    } = useLocalStorage<Todo[]>('react-todos', []);
 
     const handleSearch = (searchValue: string) => {
       setSearchValue(searchValue);
@@ -62,6 +63,10 @@ export default function TodoProvider({ children }: TodoProviderProps) {
       setIsModalOpen(!isModalOpen);
     };
 
+    const addTodo = (todo: Todo) => {
+      setTodos([...todos, todo]);
+    }
+
   return (
     <TodoContext.Provider value={{
       searchValue,
@@ -72,6 +77,7 @@ export default function TodoProvider({ children }: TodoProviderProps) {
       handleRemoveTodo,
       isModalOpen,
       toggleModal,
+      addTodo,
     }}>
       { children }
     </TodoContext.Provider>

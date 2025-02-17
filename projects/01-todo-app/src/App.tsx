@@ -6,6 +6,7 @@ import Searchbar from './components/Searchbar/Searchbar'
 import TodoItem from './components/TodoItem/TodoItem'
 import TodoSkeleton from './components/TodoSkeleton/TodoSkeleton'
 import Modal from './components/Modal/Modal'
+import AddTodoForm from './components/AddTodoForm/AddTodoForm'
 
 import TodoProvider, { TodoContext } from './core/TodoContext'
 
@@ -68,8 +69,7 @@ function App() {
 
                 { isModalOpen && (
                   <Modal>
-                    La funcionalidad de agregar TODO
-                    {/* <AddTodoForm /> */}
+                    <AddTodoForm />
                   </Modal>
                 )}
               </>
