@@ -1,11 +1,15 @@
+import { useContext } from 'react';
+
 import './Counter.css';
 
-interface CounterProps {
-  total: number;
-  completed: number;
-}
+import { TodoContext } from '../../core/TodoContext';
 
-export default function Counter({ total, completed }: CounterProps) {
+export default function Counter() {
+  const { todos } = useContext(TodoContext);
+
+  const completed = todos.filter(todo => todo.completed).length;
+  const total = todos.length;
+
   return (
     <h1>
       {completed === total ? '🎉' : '🤔'}

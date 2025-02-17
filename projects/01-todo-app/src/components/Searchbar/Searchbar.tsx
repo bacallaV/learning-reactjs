@@ -1,14 +1,14 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useContext } from 'react';
+
 import './Searchbar.css'
 
-interface SearchbarProps {
-  onSearch: (searchValue: string) => void;
-}
-export default function Searchbar({
-  onSearch,
-}: SearchbarProps) {
+import { TodoContext } from '../../core/TodoContext';
+
+export default function Searchbar() {
+  const { handleSearch } = useContext(TodoContext);
+
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onSearch(event.target.value);
+    handleSearch(event.target.value);
   };
 
   return (
