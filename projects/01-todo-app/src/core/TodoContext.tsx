@@ -11,6 +11,8 @@ type TodoContextType = {
   status: string;
   handleCompleteTodo: (index: number) => () => void;
   handleRemoveTodo: (index: number) => () => void;
+  isModalOpen: boolean;
+  toggleModal: () => void;
 };
 const TodoContext = createContext<TodoContextType>({
   searchValue: '',
@@ -19,6 +21,8 @@ const TodoContext = createContext<TodoContextType>({
   status: '',
   handleCompleteTodo: () => () => {},
   handleRemoveTodo: () => () => {},
+  isModalOpen: false,
+  toggleModal: () => {},
 });
 
 interface TodoProviderProps {
@@ -26,6 +30,7 @@ interface TodoProviderProps {
 }
 export default function TodoProvider({ children }: TodoProviderProps) {
   const [searchValue, setSearchValue] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
     const {
       item: todos,
@@ -53,6 +58,10 @@ export default function TodoProvider({ children }: TodoProviderProps) {
         setTodos(newTodos);
       };
 
+    const toggleModal = () => {
+      setIsModalOpen(!isModalOpen);
+    };
+
   return (
     <TodoContext.Provider value={{
       searchValue,
@@ -61,6 +70,8 @@ export default function TodoProvider({ children }: TodoProviderProps) {
       status,
       handleCompleteTodo,
       handleRemoveTodo,
+      isModalOpen,
+      toggleModal,
     }}>
       { children }
     </TodoContext.Provider>
