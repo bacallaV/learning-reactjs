@@ -7,8 +7,10 @@ import TodoItem from './components/TodoItem/TodoItem'
 import TodoSkeleton from './components/TodoSkeleton/TodoSkeleton'
 import Modal from './components/Modal/Modal'
 import AddTodoForm from './components/AddTodoForm/AddTodoForm'
+import TodoList from './components/TodoList/TodoList'
 
 import useTodo from './hooks/useTodo'
+import TodoHeader from './components/TodoHeader/TodoHeader'
 
 function App() {
   const {
@@ -25,15 +27,17 @@ function App() {
 
   return (
     <div className="app">
-      <Counter
-        completed={todos.filter(todo => todo.completed).length}
-        total={todos.length}
-      />
+      <TodoHeader>
+        <Counter
+          completed={todos.filter(todo => todo.completed).length}
+          total={todos.length}
+        />
 
-      <Searchbar handleSearch={handleSearch} />
+        <Searchbar handleSearch={handleSearch} />
+      </TodoHeader>
 
-      <ul className='todoList'>
-        {status === 'loading' && (
+      <TodoList>
+        { status === 'loading' && (
           <>
             <TodoSkeleton />
             <TodoSkeleton />
@@ -41,11 +45,11 @@ function App() {
           </>
         )}
 
-        {status === 'failed' && (
+        { status === 'failed' && (
           <p> Ocurrió un error al cargar las tareas 🤯 </p>
         )}
 
-        {status === 'success' && todos.length === 0 && (
+        { status === 'success' && todos.length === 0 && (
           <p> No hay tareas por hacer 🎉 </p>
         )}
 
@@ -60,9 +64,8 @@ function App() {
               onCompleted={handleCompleteTodo(index)}
               onRemove={handleRemoveTodo(index)}
             />
-          ))
-        }
-      </ul>
+        ))}
+      </TodoList>
 
       <AddButton
         isModalOpen={isModalOpen}

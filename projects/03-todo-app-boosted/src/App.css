@@ -11,14 +11,6 @@
   background-color: #3e4553;
 }
 
-.todoList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  width: 100%;
-}
-
 p {
   color: white;
 }
