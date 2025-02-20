@@ -12,12 +12,8 @@ import TodoProvider, { TodoContext } from './core/TodoContext'
 
 function App() {
   return (
-    <div className="app">
-      <TodoProvider>
-        <Counter />
-
-        <Searchbar />
-
+    <TodoProvider>
+      <div className="app">
         <TodoContext.Consumer>
           {
             ({
@@ -27,8 +23,18 @@ function App() {
               handleCompleteTodo,
               handleRemoveTodo,
               isModalOpen,
+              handleSearch,
+              toggleModal,
+              addTodo,
             }) => (
               <>
+                <Counter
+                  completed={todos.filter(todo => todo.completed).length}
+                  total={todos.length}
+                />
+
+                <Searchbar handleSearch={handleSearch} />
+
                 <ul className='todoList'>
                   {
                     status === 'loading' && (
@@ -65,11 +71,17 @@ function App() {
                   }
                 </ul>
 
-                <AddButton />
+                <AddButton
+                  isModalOpen={isModalOpen}
+                  toggleModal={toggleModal}
+                />
 
                 { isModalOpen && (
                   <Modal>
-                    <AddTodoForm />
+                    <AddTodoForm
+                      toggleModal={toggleModal}
+                      addTodo={addTodo}
+                    />
                   </Modal>
                 )}
               </>
@@ -77,8 +89,8 @@ function App() {
 
         </TodoContext.Consumer>
 
-      </TodoProvider>
-    </div>
+      </div>
+    </TodoProvider>
   )
 }
 

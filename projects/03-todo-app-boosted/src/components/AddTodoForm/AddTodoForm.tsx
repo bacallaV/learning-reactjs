@@ -1,11 +1,14 @@
 import React from 'react'
 
 import './AddTodoForm.css'
-import { TodoContext } from '@app/core/TodoContext';
 
-export default function AddTodoForm() {
-  const { toggleModal, addTodo } = React.useContext(TodoContext);
+import { Todo } from '@app/types/todo.type';
 
+type AddTodoFormProps = {
+  toggleModal: () => void;
+  addTodo: (todo: Todo) => void;
+}
+export default function AddTodoForm({ toggleModal, addTodo }: AddTodoFormProps) {
   const [todoName, setTodoName] = React.useState('');
 
   function handleTextareaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {

@@ -1,14 +1,13 @@
-import React from 'react'
 import './AddButton.css'
-
-import { TodoContext } from '@app/core/TodoContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-export default function AddButton() {
-  const { isModalOpen, toggleModal } = React.useContext(TodoContext);
-
+type AddButtonProps = {
+  isModalOpen: boolean;
+  toggleModal: () => void;
+}
+export default function AddButton({ isModalOpen, toggleModal }: AddButtonProps) {
   const handleOnClick = () => {
     toggleModal();
   }
