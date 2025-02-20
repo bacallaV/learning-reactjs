@@ -33,27 +33,23 @@ function App() {
       <Searchbar handleSearch={handleSearch} />
 
       <ul className='todoList'>
-        {
-          status === 'loading' && (
-            <>
-              <TodoSkeleton />
-              <TodoSkeleton />
-              <TodoSkeleton />
-            </>
-          )
-        }
-        {
-          status === 'failed' && (
-            <p> Ocurrió un error al cargar las tareas 🤯 </p>
-          )
-        }
-        {
-          (status === 'success' && todos.length === 0) && (
-            <p> No hay tareas por hacer 🎉 </p>
-          )
-        }
-        {
-          status === 'success' &&
+        {status === 'loading' && (
+          <>
+            <TodoSkeleton />
+            <TodoSkeleton />
+            <TodoSkeleton />
+          </>
+        )}
+
+        {status === 'failed' && (
+          <p> Ocurrió un error al cargar las tareas 🤯 </p>
+        )}
+
+        {status === 'success' && todos.length === 0 && (
+          <p> No hay tareas por hacer 🎉 </p>
+        )}
+
+        {status === 'success' &&
           todos
           .filter((todo) => todo.label.toLowerCase().includes(searchValue.toLowerCase()))
           .map((todo, index) => (
