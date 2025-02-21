@@ -6,3 +6,7 @@ h1 {
   text-align: center;
   color: white;
 }
+
+h1.counter.loading {
+  opacity: 50%;
+}

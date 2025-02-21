@@ -5,9 +5,11 @@ import './Searchbar.css'
 
 type SearchbarProps = {
   handleSearch: (searchValue: string) => void;
+  isLoading?: boolean;
 }
 export default function Searchbar({
   handleSearch,
+  isLoading,
 }: SearchbarProps) {
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleSearch(event.target.value);
@@ -18,6 +20,7 @@ export default function Searchbar({
       type="text"
       placeholder="Buscar..."
       onChange={handleSearchChange}
+      disabled={isLoading}
     />
   )
 }

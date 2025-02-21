@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className="app">
-      <TodoHeader>
+      <TodoHeader isLoading={status === 'loading'}>
         <Counter
           completed={todos.filter(todo => todo.completed).length}
           total={todos.length}
