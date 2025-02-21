@@ -5,19 +5,25 @@ import { Todo } from '@app/types/todo.type';
 
 type TodoListProps = {
   status: 'initial' | 'loading' | 'failed' | 'success';
-  todos: Todo[];
+  totalTodos: number;
+  searchedTodos: Todo[];
+  searchText: string;
   onLoading: () => JSX.Element;
   onFailed: () => JSX.Element;
   onEmpty: () => JSX.Element;
-  onSuccess: (todo: Todo, index: number) => JSX.Element;
+  onEmptySearch: (searchText: string) => JSX.Element;
+  children: (todo: Todo, index: number) => JSX.Element;
 }
 export default function TodoList({
   status,
-  todos,
+  totalTodos,
+  searchedTodos,
+  searchText,
   onLoading,
   onFailed,
   onEmpty,
-  onSuccess
+  onEmptySearch,
+  children,
 }: TodoListProps) {
   return (
     <ul className='todoList'>
@@ -25,9 +31,11 @@ export default function TodoList({
 
       { status === 'failed' && onFailed() }
 
-      { (status === 'success' && todos.length === 0) && onEmpty() }
+      { (status === 'success' && totalTodos === 0) && onEmpty() }
 
-      {status === 'success' && todos.map(onSuccess)}
+      { (status === 'success' && searchedTodos.length === 0) && onEmptySearch(searchText) }
+
+      {status === 'success' && searchedTodos.map(children)}
     </ul>
   )
 }

@@ -38,9 +38,11 @@ function App() {
 
       <TodoList
         status={status}
-        todos={todos.filter(
+        totalTodos={todos.length}
+        searchedTodos={todos.filter(
           (todo) => todo.label.toLowerCase().includes(searchValue.toLowerCase())
         )}
+        searchText={searchValue}
         onLoading={() => (
           <>
             <TodoSkeleton />
@@ -54,7 +56,11 @@ function App() {
         onEmpty={() => (
           <p> No hay tareas por hacer 🎉 </p>
         )}
-        onSuccess={(todo, index) => (
+        onEmptySearch={(searchText) => (
+          <p> No hay tareas que coincidan con "{searchText}" 😅 </p>
+        )}
+      >
+        {(todo, index) => (
           <TodoItem
             key={index}
             label={todo.label}
@@ -63,7 +69,7 @@ function App() {
             onRemove={handleRemoveTodo(index)}
           />
         )}
-      />
+      </TodoList>
 
       <AddButton
         isModalOpen={isModalOpen}
