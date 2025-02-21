@@ -36,36 +36,34 @@ function App() {
         <Searchbar handleSearch={handleSearch} />
       </TodoHeader>
 
-      <TodoList>
-        { status === 'loading' && (
+      <TodoList
+        status={status}
+        todos={todos.filter(
+          (todo) => todo.label.toLowerCase().includes(searchValue.toLowerCase())
+        )}
+        onLoading={() => (
           <>
             <TodoSkeleton />
             <TodoSkeleton />
             <TodoSkeleton />
           </>
         )}
-
-        { status === 'failed' && (
+        onFailed={() => (
           <p> Ocurrió un error al cargar las tareas 🤯 </p>
         )}
-
-        { status === 'success' && todos.length === 0 && (
+        onEmpty={() => (
           <p> No hay tareas por hacer 🎉 </p>
         )}
-
-        {status === 'success' &&
-          todos
-          .filter((todo) => todo.label.toLowerCase().includes(searchValue.toLowerCase()))
-          .map((todo, index) => (
-            <TodoItem
-              key={index}
-              label={todo.label}
-              completed={todo.completed}
-              onCompleted={handleCompleteTodo(index)}
-              onRemove={handleRemoveTodo(index)}
-            />
-        ))}
-      </TodoList>
+        onSuccess={(todo, index) => (
+          <TodoItem
+            key={index}
+            label={todo.label}
+            completed={todo.completed}
+            onCompleted={handleCompleteTodo(index)}
+            onRemove={handleRemoveTodo(index)}
+          />
+        )}
+      />
 
       <AddButton
         isModalOpen={isModalOpen}

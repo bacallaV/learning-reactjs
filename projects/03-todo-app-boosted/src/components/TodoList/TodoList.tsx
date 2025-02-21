@@ -1,14 +1,33 @@
-import React from 'react'
+import { JSX } from 'react'
 
 import './TodoList.css'
+import { Todo } from '@app/types/todo.type';
 
 type TodoListProps = {
-  children: React.ReactNode;
+  status: 'initial' | 'loading' | 'failed' | 'success';
+  todos: Todo[];
+  onLoading: () => JSX.Element;
+  onFailed: () => JSX.Element;
+  onEmpty: () => JSX.Element;
+  onSuccess: (todo: Todo, index: number) => JSX.Element;
 }
-export default function TodoList({ children }: TodoListProps) {
+export default function TodoList({
+  status,
+  todos,
+  onLoading,
+  onFailed,
+  onEmpty,
+  onSuccess
+}: TodoListProps) {
   return (
     <ul className='todoList'>
-      {children}
+      { status === 'loading' && onLoading() }
+
+      { status === 'failed' && onFailed() }
+
+      { (status === 'success' && todos.length === 0) && onEmpty() }
+
+      {status === 'success' && todos.map(onSuccess)}
     </ul>
   )
 }
