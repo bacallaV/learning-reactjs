@@ -1,23 +1,30 @@
-import { withLocalStorageListener } from './withLocalStorageListener';
+import { useLocalStorageListener } from './useLocalStorageListener';
 
 import './UnsyncedDataAlert.css';
 
 type UnsyncedDataAlertProps = {
-  isUnsynced: boolean;
   sync: () => void;
 }
-function UnsyncedDataAlert({ isUnsynced, sync }: UnsyncedDataAlertProps) {
+export default function UnsyncedDataAlert({ sync }: UnsyncedDataAlertProps) {
+  const [ isUnsynced, setIsUnsynced ] = useLocalStorageListener();
+
+  function handleSync(event: React.MouseEvent) {
+    event.preventDefault();
+
+    setIsUnsynced(false);
+    sync();
+  }
+
   if (!isUnsynced) {
-    return null
+    return null;
   }
 
   return (
     <div className='unsynced-data-alert'>
       <p>
-        Hay datos sin <a href="#" onClick={sync}>sincronizar</a>
+        Hay datos sin <a href="#" onClick={handleSync}>sincronizar</a>
       </p>
     </div>
   )
-}
 
-export const UnsyncedDataAlertWithLocalStorageListener = withLocalStorageListener(UnsyncedDataAlert);
+}
