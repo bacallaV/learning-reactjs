@@ -11,6 +11,7 @@ import TodoList from './components/TodoList/TodoList'
 
 import useTodo from './hooks/useTodo'
 import TodoHeader from './components/TodoHeader/TodoHeader'
+import { UnsyncedDataAlertWithLocalStorageListener } from './components/UnsyncedDataAlert/UnsyncedDataAlert'
 
 function App() {
   const {
@@ -23,6 +24,7 @@ function App() {
     handleSearch,
     toggleModal,
     addTodo,
+    sync,
   } = useTodo();
 
   return (
@@ -70,6 +72,8 @@ function App() {
           />
         )}
       </TodoList>
+
+      <UnsyncedDataAlertWithLocalStorageListener isUnsynced={false} sync={sync} />
 
       <AddButton
         isModalOpen={isModalOpen}

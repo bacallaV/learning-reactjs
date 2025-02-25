@@ -12,6 +12,7 @@ export default function useTodo() {
     item: todos,
     setItem: setTodos,
     status,
+    sync,
   } = useLocalStorage<Todo[]>('react-todos', []);
 
   const handleSearch = (searchValue: string) => {
@@ -49,5 +50,6 @@ export default function useTodo() {
     isModalOpen,
     toggleModal,
     addTodo,
+    sync,
   };
 }

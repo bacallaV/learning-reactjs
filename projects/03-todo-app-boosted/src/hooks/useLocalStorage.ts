@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export default function useLocalStorage<T = unknown>(key: string, defaultValue: T) {
   const [item, setItem] = useState<T>(defaultValue);
   const [status, setStatus] = useState<'initial' | 'loading' | 'failed' | 'success'>('initial');
+  const [shouldSync, setShouldSync] = useState(false);
 
   useEffect(() => {
     setStatus('loading');
@@ -14,7 +15,7 @@ export default function useLocalStorage<T = unknown>(key: string, defaultValue: 
         setStatus('success');
       }
     }, 3000);
-  }, []);
+  }, [shouldSync]);
 
   function getInitialValues(): T {
     const value = localStorage.getItem(key);
@@ -33,9 +34,15 @@ export default function useLocalStorage<T = unknown>(key: string, defaultValue: 
     setItem(newValues);
   };
 
+  function sync(): void {
+    setItem(defaultValue);
+    setShouldSync(!shouldSync);
+  }
+
   return {
     item,
     setItem: setDefaultValues,
     status,
+    sync,
   };
 };
