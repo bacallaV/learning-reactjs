@@ -1,7 +1,7 @@
 import React from "react"
 import { initialState, SecurityCodeActionTypes, securityCodeReducer } from "./reducer"
 
-export default function UseState() {
+export default function UseReducer() {
   const [state, dispatch] = React.useReducer(securityCodeReducer, initialState);
 
   function onCodeChange(e: React.ChangeEvent<HTMLInputElement>) {

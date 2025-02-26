@@ -1,11 +1,11 @@
 import './App.css'
 
-import UseState from './UseState'
+import UseReducer from './UseReducer'
 
 function App() {
   return (
     <>
-      <UseState />
+      <UseReducer />
     </>
   )
 }
