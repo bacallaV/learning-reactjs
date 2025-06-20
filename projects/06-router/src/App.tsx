@@ -1,10 +1,11 @@
 import { HashRouter, Route, Routes } from 'react-router-dom'
+import { Menu } from './components/Menu'
 
 function App() {
   return (
     <>
       <HashRouter>
-        <div>Menu</div>
+        <Menu />
 
         <Routes>
           <Route path="/" element={<div>Home</div>} />
