@@ -13,6 +13,14 @@ const routes = [
     to: "/profile",
     name: "Profile",
   },
+  {
+    to: "/login",
+    name: "Iniciar sesión",
+  },
+  {
+    to: "/logout",
+    name: "Cerrar sesión",
+  },
 ];
 
 export function Menu() {
@@ -20,7 +28,7 @@ export function Menu() {
     <nav>
       <ul>
         {routes.map((route) => (
-          <li>
+          <li key={route.to}>
             <NavLink
               to={route.to}
               style={({ isActive }) => ({  

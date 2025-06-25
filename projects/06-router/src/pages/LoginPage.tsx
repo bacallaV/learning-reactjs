@@ -1,0 +1,39 @@
+import React from "react";
+
+import { useAuth } from "../contexts/auth";
+
+export function LoginPage() {
+  const [formData, setFormData] = React.useState({
+    username: '',
+  });
+
+  const { login } = useAuth();
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    login(formData.username);
+  }
+
+  function handleFormChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setFormData({
+      [event.target.name as keyof typeof formData]: event.target.value,
+    });
+  }
+
+  return (
+    <section>
+      <h1>Iniciar sesión</h1>
+
+      <form onSubmit={handleSubmit}>
+        <label>Nombre de usuario:</label>
+        <input type="text" name="username" required onChange={handleFormChange} />
+
+        <button type="submit">
+          Iniciar sesión
+        </button>
+      </form>
+    </section>
+  )
+}
+
