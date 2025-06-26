@@ -1,8 +1,11 @@
 import React from "react";
 
 import { useAuth } from "../contexts/auth";
+import { Navigate } from "react-router-dom";
 
 export function LoginPage() {
+  const { user } = useAuth();
+
   const [formData, setFormData] = React.useState({
     username: '',
   });
@@ -19,6 +22,12 @@ export function LoginPage() {
     setFormData({
       [event.target.name as keyof typeof formData]: event.target.value,
     });
+  }
+
+  if (user) {
+    return (
+      <Navigate to="/profile" />
+    )
   }
 
   return (

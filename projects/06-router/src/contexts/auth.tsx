@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 type User = {
   username: string;
@@ -44,6 +44,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     </AuthContext.Provider>
   );
 }
+
  export function useAuth() {
   return React.useContext(AuthContext);
 }
+
+export function AuthGuard({ children, redirectTo = "/"}: { children: React.ReactNode, redirectTo?: string }) {
+  const { user } = useAuth();
+
+  if (!user) {
+    return (
+      <Navigate to={redirectTo} />
+    )
+  }
+
+  return children;
+}
+
