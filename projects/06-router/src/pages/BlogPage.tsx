@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 
-import { blogPosts } from "../data/blog-posts";
+import { useBlogPost } from "../contexts/blog-post";
 
 export function BlogPage() {
+  const { blogPosts } = useBlogPost();
+
   return (
     <div>
       <h1>Blog Page</h1>

@@ -1,18 +1,25 @@
 import { useNavigate, useParams } from "react-router-dom"
-import { blogPosts } from "../data/blog-posts";
 import { useAuth } from "../contexts/auth";
+import { useBlogPost } from "../contexts/blog-post";
 
 export function BlogPostPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { deletePost } = useBlogPost();
+  const { findPost } = useBlogPost();
 
-  const blogPost = blogPosts.find(post => post.slug === slug);
+  const blogPost = findPost(slug ?? '');
 
   const isAuthor = (blogPost?.author === user?.username && user?.role === 'editor') || user?.role === 'admin';
 
   function handleBack() {
     navigate('/blog');
+  }
+
+  function handleDelete() {
+    deletePost(blogPost?.slug ?? '');
+    handleBack();
   }
 
   return (
@@ -30,12 +37,12 @@ export function BlogPostPage() {
       )}
 
       {isAuthor && (
-        <button onClick={handleBack}>
+        <button onClick={handleDelete} type="button">
           Eliminar Post
         </button>
       )}
 
-      <button onClick={handleBack}>
+      <button onClick={handleBack} type="button">
         Volver al Blog
       </button>
     </section>
