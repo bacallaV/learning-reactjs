@@ -1,9 +1,9 @@
 import React from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-type User = {
-  username: string;
-}
+import type { User } from '../types/user';
+import { specialUsers } from '../data/users';
+
 type AuthContextType = {
   user: User | null;
   login: (username: string) => void;
@@ -21,9 +21,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const navigate  = useNavigate();
 
   const login = (username: string) => {
-    setUser({
+    const specialUser = specialUsers.find((u) => u.username === username);
+
+    const user = specialUser ?? {
       username,
-    });
+      role: 'user',
+    };
+
+    setUser(user);
     navigate('/profile', { replace: true });
   }
 
