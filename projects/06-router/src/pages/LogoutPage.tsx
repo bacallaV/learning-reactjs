@@ -13,7 +13,7 @@ export function LogoutPage() {
 
   return (
     <section>
-      <h1>Cerrar sessión</h1>
+      <h1>Cerrar sesión</h1>
 
       <form onSubmit={handleSubmit}>
         <label>¿Estás seguro de querer cerrar sesión?</label>
