@@ -26,7 +26,7 @@ export function LoginPage() {
 
   if (user) {
     return (
-      <Navigate to="/profile" />
+      <Navigate to={`/profile/${user.username}`} />
     )
   }
 

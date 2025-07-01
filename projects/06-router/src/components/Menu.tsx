@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../contexts/auth";
+import { useEffect, useState } from "react";
 
-const routes: {
+const ROUTES: {
   to: string;
   name: string;
   privacity: 'public' | 'public-only' | 'private';
@@ -35,6 +36,24 @@ const routes: {
 
 export function Menu() {
   const { user } = useAuth();
+  const [routes, setRoutes] = useState(ROUTES);
+
+  useEffect(() => {
+    // Update the profile route to include the username if the user is logged in
+    if (user) {
+      setRoutes((prevRoutes) => {
+        const index = prevRoutes.findIndex((prevRoute) => prevRoute.to.includes('profile'));
+
+        prevRoutes[index] = {
+          ...prevRoutes[index],
+          to: `/profile/${user.username}`,
+        }
+
+        return [...prevRoutes];
+      });
+    }
+  }, [user]);
+
 
   return (
     <nav>

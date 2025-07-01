@@ -23,14 +23,9 @@ function App() {
               <Route path="/" element={<div>Home</div>} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogPostPage />} />
-              <Route
-                path="/profile"
-                element={
-                  <AuthGuard>
-                    <ProfilePage />
-                  </AuthGuard>
-                }
-              />
+
+              <Route path="/profile/:username" element={<ProfilePage />} />
+
               <Route path="/login" element={<LoginPage />} />
               <Route
                 path="/logout"
