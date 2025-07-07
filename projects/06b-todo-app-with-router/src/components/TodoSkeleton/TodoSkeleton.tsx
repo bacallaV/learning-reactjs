@@ -8,7 +8,12 @@ export default function TodoSkeleton() {
 
       {/* <div className={`tis-label`}></div> */}
 
-      <div className='tis-button'>
+      <div className='tis-button-container'>
+        <div className='tis-button'>
+        </div>
+
+        <div className='tis-button'>
+        </div>
       </div>
     </li>
   )

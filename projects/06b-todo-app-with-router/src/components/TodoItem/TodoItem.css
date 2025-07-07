@@ -16,6 +16,12 @@
   color: white;
 }
 
+.ti-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
 .ti-label.completed {
   color: #a4a4a4;
   text-decoration: line-through;
@@ -50,6 +56,22 @@
   cursor: pointer;
   transition: background-color 0.25s;
 }
+
+.ti-edit-button {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+
+  border: none;
+  background-color: #61dafa;
+  border-radius: 50%;
+
+  color: white;
+
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
 .ti-complete-button.completed {
   background-color: darkgray;
 }
@@ -67,4 +89,8 @@
 
 .ti-complete-button:hover {
   background-color: #00b28f;
+}
+
+.ti-edit-button:hover {
+  background-color: #3cbbe0;
 }

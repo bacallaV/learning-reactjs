@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import useLocalStorage from "@app/hooks/useLocalStorage";
 
-import { Todo } from "@app/types/todo.type";
+import type { CreateTodoDTO, Todo } from "@app/types/todo.type";
 
 export default function useTodo() {
   const [searchValue, setSearchValue] = useState('');
@@ -19,16 +19,20 @@ export default function useTodo() {
     setSearchValue(searchValue);
   };
 
-  const handleCompleteTodo = (index: number) =>
+  const handleCompleteTodo = (id: number) =>
     () => {
       const newTodos = [...todos];
-      newTodos[index].completed = !newTodos[index].completed;
+
+      const selectedTodo = newTodos.findIndex((todo) => todo.id === id);
+      if (selectedTodo === -1) return;
+
+      newTodos[selectedTodo].completed = !newTodos[selectedTodo].completed;
       setTodos(newTodos);
     };
 
-  const handleRemoveTodo = (index: number) =>
+  const handleRemoveTodo = (id: number) =>
     () => {
-      const newTodos = todos.filter((_, i) => i!== index);
+      const newTodos = todos.filter((todo) => todo.id !== id);
       setTodos(newTodos);
     };
 
@@ -36,8 +40,14 @@ export default function useTodo() {
     setIsModalOpen(!isModalOpen);
   };
 
-  const addTodo = (todo: Todo) => {
-    setTodos([...todos, todo]);
+  const addTodo = (todo: CreateTodoDTO) => {
+    setTodos([
+      ...todos,
+      {
+        ...todo,
+        id: Date.now(),
+      },
+    ]);
   }
 
   return {

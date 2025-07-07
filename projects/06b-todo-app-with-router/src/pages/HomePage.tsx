@@ -62,13 +62,14 @@ export function HomePage() {
           <p> No hay tareas que coincidan con "{searchText}" 😅 </p>
         )}
       >
-        {(todo, index) => (
+        {(todo) => (
           <TodoItem
-            key={index}
+            key={todo.id}
             label={todo.label}
             completed={todo.completed}
-            onCompleted={handleCompleteTodo(index)}
-            onRemove={handleRemoveTodo(index)}
+            onCompleted={handleCompleteTodo(todo.id)}
+            onRemove={handleRemoveTodo(todo.id)}
+            onEdit={() => console.log('Editing...')}
           />
         )}
       </TodoList>
