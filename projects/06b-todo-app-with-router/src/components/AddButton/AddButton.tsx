@@ -1,23 +1,15 @@
 import './AddButton.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAdd } from '@fortawesome/free-solid-svg-icons';
 
 type AddButtonProps = {
-  isModalOpen: boolean;
-  toggleModal: () => void;
+  onClick?: () => void;
 }
-export default function AddButton({ isModalOpen, toggleModal }: AddButtonProps) {
-  const handleOnClick = () => {
-    toggleModal();
-  }
-
+export default function AddButton(props: AddButtonProps) {
   return (
-    <button className='addButton' type='button' onClick={handleOnClick}>
-      { !isModalOpen
-        ? (<FontAwesomeIcon icon={faAdd} width={52} />) :
-        (<FontAwesomeIcon icon={faTimes} width={52} />)
-      }
+    <button className='addButton' type='button' onClick={props.onClick}>
+      <FontAwesomeIcon icon={faAdd} width={52} />
     </button>
   )
 }

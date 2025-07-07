@@ -1,12 +1,12 @@
 import './HomePage.css'
 
+import { useNavigate } from 'react-router-dom'
+
 import AddButton from './../components/AddButton/AddButton'
 import Counter from './../components/Counter/Counter'
 import Searchbar from './../components/Searchbar/Searchbar'
 import TodoItem from './../components/TodoItem/TodoItem'
 import TodoSkeleton from './../components/TodoSkeleton/TodoSkeleton'
-import Modal from './../components/Modal/Modal'
-import AddTodoForm from './../components/AddTodoForm/AddTodoForm'
 import TodoList from './../components/TodoList/TodoList'
 
 import useTodo from './../hooks/useTodo'
@@ -20,12 +20,19 @@ export function HomePage() {
     searchValue,
     handleCompleteTodo,
     handleRemoveTodo,
-    isModalOpen,
     handleSearch,
-    toggleModal,
-    addTodo,
     sync,
   } = useTodo();
+
+  const navigate = useNavigate();
+
+  function handleAddTodo(): void {
+    navigate('/add');
+  }
+
+  function handleEditTodo(id: number): void {
+    navigate(`/edit/${id}`);
+  }
 
   return (
     <div className="home">
@@ -69,7 +76,7 @@ export function HomePage() {
             completed={todo.completed}
             onCompleted={handleCompleteTodo(todo.id)}
             onRemove={handleRemoveTodo(todo.id)}
-            onEdit={() => console.log('Editing...')}
+            onEdit={() => handleEditTodo(todo.id)}
           />
         )}
       </TodoList>
@@ -77,19 +84,8 @@ export function HomePage() {
    <UnsyncedDataAlert sync={sync} />
 
       <AddButton
-        isModalOpen={isModalOpen}
-        toggleModal={toggleModal}
+        onClick={handleAddTodo}
       />
-
-      { isModalOpen && (
-        <Modal>
-          <AddTodoForm
-            toggleModal={toggleModal}
-            addTodo={addTodo}
-          />
-        </Modal>
-      )}
-
     </div>
   )
 }
