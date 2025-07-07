@@ -1,0 +1,12 @@
+.unsynced-data-alert {
+  margin: 24px 0;
+  padding: 12px 24px;
+
+  background-color: #ac9b61;
+  border: none;
+  border-radius: 8px;
+}
+
+.unsynced-data-alert a {
+  color: #fff;
+}
