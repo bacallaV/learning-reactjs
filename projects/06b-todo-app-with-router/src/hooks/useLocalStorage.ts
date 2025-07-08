@@ -8,12 +8,8 @@ export default function useLocalStorage<T = unknown>(key: string, defaultValue: 
   useEffect(() => {
     setStatus('loading');
     setTimeout(() => {
-      if (Math.random() < 0.2) {
-        setStatus('failed');
-      } else {
         setDefaultValues(getInitialValues());
         setStatus('success');
-      }
     }, 3000);
   }, [shouldSync]);
 

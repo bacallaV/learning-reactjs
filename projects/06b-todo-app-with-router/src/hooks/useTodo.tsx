@@ -50,6 +50,22 @@ export default function useTodo() {
     ]);
   }
 
+  const editTodo = (id: number, content: string) => {
+    const newTodos = [...todos];
+
+    const searchedTodoIndex = newTodos.findIndex((todo) => todo.id === id);
+    if (searchedTodoIndex === -1) {
+      return;
+    }
+
+    newTodos[searchedTodoIndex].label = content;
+    setTodos(newTodos);
+  }
+
+  const searchOne = (id: number): Todo | undefined => {
+    return todos.find((todo) => todo.id === id);
+  }
+
   return {
     searchValue,
     handleSearch,
@@ -61,5 +77,7 @@ export default function useTodo() {
     toggleModal,
     addTodo,
     sync,
+    searchOne,
+    editTodo,
   };
 }

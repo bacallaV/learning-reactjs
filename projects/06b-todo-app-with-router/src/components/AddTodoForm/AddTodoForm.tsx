@@ -3,11 +3,12 @@ import React from 'react'
 import './AddTodoForm.css'
 
 type AddTodoFormProps = {
+  content?: string;
   onSubmit: (content: string) => void;
   onCancel: () => void;
 }
 export default function AddTodoForm(props: AddTodoFormProps) {
-  const [content, setContent] = React.useState('');
+  const [content, setContent] = React.useState(props.content ?? '');
 
   function handleTextareaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setContent(event.target.value);
