@@ -1,6 +1,7 @@
 import './HomePage.css'
 
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import AddButton from './../components/AddButton/AddButton'
 import Counter from './../components/Counter/Counter'
@@ -20,11 +21,21 @@ export function HomePage() {
     searchValue,
     handleCompleteTodo,
     handleRemoveTodo,
-    handleSearch,
+    handleSearch: search,
     sync,
   } = useTodo();
 
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (!searchParams.has('search')) {
+      return;
+    }
+
+    search(searchParams.get('search') || '');
+  }, [searchParams, search]);
+
 
   function handleAddTodo(): void {
     navigate('/add');
@@ -32,6 +43,11 @@ export function HomePage() {
 
   function handleEditTodo(id: number): void {
     navigate(`/edit/${id}`);
+  }
+
+  function handleSearch(searchValue: string): void {
+    setSearchParams({ search: searchValue });
+    search(searchValue);
   }
 
   return (
@@ -42,7 +58,7 @@ export function HomePage() {
           total={todos.length}
         />
 
-        <Searchbar handleSearch={handleSearch} />
+        <Searchbar initialValue={searchParams.get('search') ?? ''} handleSearch={handleSearch} />
       </TodoHeader>
 
       <TodoList
